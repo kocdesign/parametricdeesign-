@@ -1,29 +1,55 @@
-body {
-  /* Deep navy for softer trails */
-  background: #020b18;
-  overflow: hidden;
-  ...
-}
+<!DOCTYPE html>
 
-<!-- TRY: a warm amber palette -->
+<html lange='en'>
+
+<head>
+
+    <title>visualparasystem</title>
+
+    <style>
+      
+        body {
+    /* Deep navy for softer trails */
+          background: #020b18;
+          overflow: hidden;
+        
+        }
+
+</head>
+
+<body>
+
+  <div id="controls">
+
+/* Inside <div id="controls"> */
+<button class="mode-btn" data-mode="5">Radial Wave</button>
+<button id="start-btn">Activate Mic</button> 
+
+  </div>
+
+/* TRY: a warm amber palette */
 <div class="freq-fill" id="bar-bass"    style="background:#ff4500"></div> <!-- red-orange -->
 <div class="freq-fill" id="bar-lowmid" style="background:#ff8c00"></div> <!-- dark orange -->
 <div class="freq-fill" id="bar-mid"     style="background:#ffd700"></div> <!-- gold -->
 <div class="freq-fill" id="bar-highmid" style="background:#ffe066"></div> <!-- light gold -->
 <div class="freq-fill" id="bar-treble"  style="background:#fff8dc"></div> <!-- cream -->
 
+  </div>
+
 /* ORIGINAL — title is faint (0.25 opacity) */
-#title-block h1 {
-  color: rgba(255,255,255,0.25);
-}
+#title-block 
+  
+  h1 {
+      color: rgba(255,255,255,0.25);
+  }
 
-/* TRY: swap in "Space Grotesk" and "Playfair Display" */
-@import url('https://fonts.googleapis.com/css2?
-  family=Space+Grotesk:wght@300;400;600
-  family=Playfair+Display:wght@400;700
-  display=swap');
+/* TRY: swap in "Space Grotesk" and "Playfair Display" 
+@import url('https://fonts.googleapis.com/css2? --> */
+  family=Space+Grotesk: wght@300; 400; 600
+  family=Playfair+Display: wght@400; 700
+  display=swap;
 
-/* Then update the font-family references: */
+<!-- Then update the font-family references: */ -->
 body       { font-family: 'Space Grotesk', sans-serif; }
 #mode-name { font-family: 'Playfair Display', serif; }
 #note-name { font-family: 'Playfair Display', serif; }
@@ -47,74 +73,71 @@ const sm = 0.2;
 sBass = sBass * (1 - sm) + bass * sm * 6; // ×6 = bass hits harder
 
 drawLissajous()
-
-  const freqRatioA = 4 + sBass    * 4;
-const freqRatioB = 5 + sHighMid * 3;
-const phaseShift = t * 0.2 + sMid * Math.PI * 2;
+      
+      const freqRatioA = 4 + sBass    * 4;
+      const freqRatioB = 5 + sHighMid * 3;
+      const phaseShift = t * 0.2 + sMid * Math.PI * 2;
 
   /* TRY: a short, sharp tail */
-const LISS_HISTORY = 200;
+      const LISS_HISTORY = 200;
 
   /* TRY: very slow fade (ghostly, accumulating image) */
-ctx.fillStyle = `rgba(0,0,0,0.04)`;
+      ctx.fillStyle = rgba(0,0,0,0.04);
 
 drawMandala()
 
   /* TRY: fewer petals, driven by bass instead */
-const petals = Math.round(3 + sBass * 8);
+      const petals = Math.round(3 + sBass * 8);
 
   /* TRY: reverse spin, driven by treble */
-const rotSpeed = -(sTreble * 0.06 + 0.002);
+      const rotSpeed = -(sTreble * 0.06 + 0.002);
 
   /* TRY: longer, thinner petals */
-const petalLen = ringR * (0.9 + bandVal * 1.2);
-const petalW   = ringR * (0.1 + sMid * 0.15);
+      const petalLen = ringR * (0.9 + bandVal * 1.2);
+      const petalW   = ringR * (0.1 + sMid * 0.15);
 
 drawConstellation()
 
   /* TRY: 400 small, fast particles — dense nebula feel */
-for (let i = 0; i < 400; i++) { ... }
-  size:        Math.random() * 1.2 + 0.2,
-  orbitSpeed:  (Math.random() - 0.5) * 0.012,
+      for (let i = 0; i < 400; i++) { ... }
+                                     size:        Math.random() * 1.2 + 0.2,
+                                     orbitSpeed:  (Math.random() - 0.5) * 0.012,
 
   /* Inside newParticle(): */
-return {
-  vx:         (Math.random() - 0.5) * 0.4,   // drift velocity
-  vy:         (Math.random() - 0.5) * 0.4,
-  size:        Math.random() * 2.5 + 0.5,   // base dot radius (px)
-  orbitR:      Math.random() * Math.min(W,H) * 0.38 + 20, // orbit radius
-  orbitSpeed:  (Math.random() - 0.5) * 0.004, // orbit angular speed
-};
+                                     return {
+                                       vx:         (Math.random() - 0.5) * 0.4,   // drift velocity
+                                         vy:         (Math.random() - 0.5) * 0.4,
+                                     size:        Math.random() * 2.5 + 0.5,   // base dot radius (px)
+                                     orbitR:      Math.random() * Math.min(W,H) * 0.38 + 20, // orbit radius
+                                     orbitSpeed:  (Math.random() - 0.5) * 0.004, // orbit angular speed
+
+                                    };
 
   /* TRY: always connected / web-like */
-const connectDist = 150;
+      const connectDist = 150;
 
   /* TRY: faster orbits that react to treble instead */
-const speed  = 0.5 + sTreble * 5;
-const spread = 0.6 + sRMS   * 0.8;
+      const speed  = 0.5 + sTreble * 5;
+      const spread = 0.6 + sRMS   * 0.8;
 
 drawInterference()
 
   /* TRY: chunky pixel art look */
-const res = 8;
+      const res = 8;
 
   /* TRY: very slow, large wave — almost a solid gradient */
-const waveFreq   = 1 + sBass * 1;
-const distortion = sMid * 0.1;
+      const waveFreq   = 1 + sBass * 1;
+      const distortion = sMid * 0.1;
 
   /* TRY: sources orbit each other in a circle */
-const s1x = x0 + Math.cos(t * 0.4) * maxR * 0.3;
-const s1y = y0 + Math.sin(t * 0.4) * maxR * 0.3;
-const s2x = x0 - Math.cos(t * 0.4) * maxR * 0.3;
-const s2y = y0 - Math.sin(t * 0.4) * maxR * 0.3;
+      const s1x = x0 + Math.cos(t * 0.4) * maxR * 0.3;
+      const s1y = y0 + Math.sin(t * 0.4) * maxR * 0.3;
+      const s2x = x0 - Math.cos(t * 0.4) * maxR * 0.3;
+      const s2y = y0 - Math.sin(t * 0.4) * maxR * 0.3;
 
 /* TRY: map to a warm palette (yellows/reds only) */
-const targetHue = (sPeakFreq / 800) * 60 + 0;
-// → red at low pitch, orange/yellow at high pitch
-
-<!-- Inside <div id="controls"> -->
-<button class="mode-btn" data-mode="5">Radial Wave</button>
-<button id="start-btn">Activate Mic</button> 
+      const targetHue = (sPeakFreq / 800) * 60 + 0;
+      // → red at low pitch, orange/yellow at high pitch
   
   const MODE_NAMES = [
   'LISSAJOUS',
@@ -125,7 +148,7 @@ const targetHue = (sPeakFreq / 800) * 60 + 0;
   'RADIAL WAVE',  // ← add this
 ];
 
-  // 5. RADIAL WAVE — draws a circle whose radius pulses with the waveform
+  /* 5. RADIAL WAVE — draws a circle whose radius pulses with the waveform */
 function drawRadialWave(x0, y0, w, h, alpha = 1) {
   const baseR = Math.min(w, h) * 0.3;
   const segments = 256; // how many points around the circle
