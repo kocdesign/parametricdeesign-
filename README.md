@@ -1,3 +1,1 @@
 visual parametrics.
-
-for shool
