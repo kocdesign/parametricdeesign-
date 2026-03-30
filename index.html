@@ -7,7 +7,7 @@
     <title>visualparasystem</title>
 
     <!-- TRY: swap in "Space Grotesk" and "Playfair Display" -->
-<link href='https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap' rel='stylesheet'>
     
     <style>
       
@@ -19,6 +19,13 @@
             font-family: 'Space Grotesk', sans-serif;
         
         }
+        
+        #controls {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 10;
+        }
 
         #controls button {
             margin-right: 6px;
@@ -28,11 +35,11 @@
         }
 
         /* ORIGINAL — title is faint (0.25 opacity) */
-#title-block h1 {
-    color: rgba(255,255,255,0.25);
-    font-family: 'Playfair Display', serif;
-
-}
+        #title-block h1 {
+            color: rgba(255,255,255,0.25);
+            font-family: 'Playfair Display', serif;
+        
+        }
 
         /* Frequency bar colors (warm amber palette) */
         .freq-fill {
@@ -67,30 +74,33 @@
     <div class="freq-fill" id="bar-mid"></div>
     <div class="freq-fill" id="bar-highmid"></div>
     <div class="freq-fill" id="bar-treble"></div>
+
+    <!-- Canvas -->
+    <canvas id="canvas"></canvas>
     
-    <script>
+<script>
         /*
 
 */
-        const canvas = document.getElementById("canvas");
-        const ctx = canvas.getContext("2d");
-        
-        let W = window.innerWidth;
-        let H = window.innerHeight;
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    
+    let W = window.innerWidth;
+    let H = window.innerHeight;
+    canvas.width = W;
+    canvas.height = H;
+    
+    window.onresize = () => {
+        W = window.innerWidth;
+        H = window.innerHeight;
         canvas.width = W;
         canvas.height = H;
-        
-        window.onresize = () => {
-            W = window.innerWidth;
-            H = window.innerHeight;
-            canvas.width = W;
-            canvas.height = H;
-        
-        };
-
-let audioCtx, analyser, freqData, timeData;
-let sBass = 0, sLowMid = 0, sMid = 0, sHighMid = 0, sTreble = 0;
-let sRMS = 0, sHue = 30;
+    
+    };
+    
+    let audioCtx, analyser, freqData, timeData;
+    let sBass = 0, sLowMid = 0, sMid = 0, sHighMid = 0, sTreble = 0;
+    let sRMS = 0, sHue = 30;
 
 /* Frequency band helper */
 function bandEnergy(arr, sr, low, high) {
@@ -128,10 +138,7 @@ document.getElementById("start-btn").onclick = async () => {
 
 /* 
 
-
-/* TRY: more reactive overall, with bass emphasized */
-const sm = 0.2;
-sBass = sBass * (1 - sm) + bass * sm * 6; // ×6 = bass hits harder
+*/
 
 function drawLissajous(x0, y0) {
     ctx.save();
@@ -157,18 +164,6 @@ function drawLissajous(x0, y0) {
     ctx.stroke();
     ctx.restore();
 }
-
-drawLissajous()
-      
-      const freqRatioA = 4 + sBass    * 4;
-      const freqRatioB = 5 + sHighMid * 3;
-      const phaseShift = t * 0.2 + sMid * Math.PI * 2;
-
-  /* TRY: a short, sharp tail */
-      const LISS_HISTORY = 200;
-
-  /* TRY: very slow fade (ghostly, accumulating image) */
-      ctx.fillStyle = rgba(0,0,0,0.04);
 
 function drawMandala(cx, cy) {
     ctx.save();
