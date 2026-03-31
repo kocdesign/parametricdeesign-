@@ -186,7 +186,7 @@ function hsl(h, s, l, a = 1) {
 /* 
 
 */
-document.getElementById("start-btn").onclick = async () => {
+document.getElementById("micButton").onclick = async () => {
     audioCtx = new AudioContext();
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     const src = audioCtx.createMediaStreamSource(stream);
