@@ -166,7 +166,7 @@
         let mode = 0;
 
 /* Frequency band helper */
-const bandEnergy(arr, sr, low, high) {
+function bandEnergy(arr, sr, low, high) {
     const iLow = Math.floor((low / sr) * arr.length);
     const iHigh = Math.floor((high / sr) * arr.length);
     let sum = 0;
@@ -175,43 +175,38 @@ const bandEnergy(arr, sr, low, high) {
 }
 
 /* HSL helper */
-const hsl(h, s, l, a = 1) => `hsla(${h},${s}%,${l}%,${a})`;
+function hsl(h, s, l, a = 1) {
+    return 'hsla (${h}, ${s}%, ${1}%, ${a}) ;
+        
 }
-     
-     document.getElementById ("modeSelect").addEventListener ("change", (e) →> {
-        mode = parseInt(e.target.value);
-    
-    }) ;
+
+        /*
+        
+*/
+document.getElementById ("modeSelect").addEventListener ("change", (e) →> {
+    mode = parseInt(e.target.value);
+
+}) ;
 
 /* 
 
 */
-const micButton = document.getElementById("micButton");
-let audioContext, analyser, source;
-
-micButton.addEventListener("click", async () => {
-    if (!audioContext) {
-        audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    }
-
-    try {
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        source = audioContext.createMediaStreamSource(stream);
-
-        analyser = audioContext.createAnalyser();
-        analyser.fftSize = 1024;
-
-        source.connect(analyser);
-
-        console.log("Mic activated!");
-    } catch (err) {
-        console.error("Error accessing mic:", err);
-    }
+document.getElementById ("micButton").onclick = async () => {
+    audioCtx = new AudioContext();
+    await audioCtx.resume(); // <- ensures AudioContext is running
     
-    animate();
-
-});
-
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const src = audiotx.createMediaStreamSource (stream);
+    
+    analyser = audioCtx. createAnalyser ();
+    analyser.fftSize = 1024; /* lower resolution = chunkier, reactive feel */
+    analyser.smoothingTimeConstant = 0.4; /* immediate / reactive (good for percussion) */
+    
+    freqData = new Uint8Array(analyser.frequencyBinCount);
+    timeData = new Uint8Array(analyser.fftSize);
+    
+    src.connect (analyser);
+    
     animate();
 };
 
