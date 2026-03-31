@@ -159,13 +159,14 @@
         canvas.height = H;
     
     };
-    
-    let audioCtx, analyser, freqData, timeData;
-    let sBass = 0, sLowMid = 0, sMid = 0, sHighMid = 0, sTreble = 0;
-    let sRMS = 0, sHue = 30;
+        
+        let audioCtx, analyser, freqData, timeData;
+        let sBass = 0, sLowMid = 0, sMid = 0, sHighMid = 0, sTreble = 0;
+        let sRMS = 0, sHue = 30;
+        let mode = 0;
 
 /* Frequency band helper */
-function bandEnergy(arr, sr, low, high) {
+const bandEnergy(arr, sr, low, high) {
     const iLow = Math.floor((low / sr) * arr.length);
     const iHigh = Math.floor((high / sr) * arr.length);
     let sum = 0;
@@ -174,9 +175,13 @@ function bandEnergy(arr, sr, low, high) {
 }
 
 /* HSL helper */
-function hsl(h, s, l, a = 1) {
-    return `hsla(${h},${s}%,${l}%,${a})`;
+const hsl(h, s, l, a = 1) => `hsla(${h},${s}%,${l}%,${a})`;
 }
+     
+     document.getElementById ("modeSelect").addEventListener ("change", (e) →> {
+        mode = parseInt(e.target.value);
+    
+    }) ;
 
 /* 
 
@@ -386,12 +391,6 @@ function drawRadialWave(x0, y0, w, h, alpha = 1) {
 /* 
 
 */
-
-let mode = 0;
-    
-document.getElementById ("modeSelect").addEventListener ("change", (e) →> {
-    mode = parseInt(e.target.value);
-}) ;
 
 function animate() {
     requestAnimationFrame(animate);
