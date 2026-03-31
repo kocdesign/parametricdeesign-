@@ -390,7 +390,12 @@ function drawRadialWave(x0, y0, w, h, alpha = 1) {
 
 */
 
-let mode = parseInt(document.getElementById("modeSelect").value);
+let mode = 0;
+    
+document.getElementById ("modeSelect") .addEventListener ("change", (e) →> {
+    mode = parseInt(e.target.value);
+
+}) ;
     
 const MODE_NAMES = [
   'LISSAJOUS',
