@@ -124,15 +124,13 @@
             <option value="4">interference</option>
             <option value="5">radial wave</option>
         </select>
-    </div>
-
-    <div id="controls">
         <!-- Inside <div id="controls"> -->
         <button id="micButton">activate mic</button>
-        <!-- Canvas -->
-        <canvas id="canvas"></canvas>
-    
+        
     </div>
+    
+    <!-- Canvas -->
+    <canvas id="canvas"></canvas>
 
     <!-- TRY: a warm amber palette / red-orange, dark orange, gold, light gold, cream-->
     <div class="freq-fill" id="bar-bass"></div>
@@ -141,11 +139,8 @@
     <div class="freq-fill" id="bar-highmid"></div>
     <div class="freq-fill" id="bar-treble"></div>
     
-    </script>
-</body>
-
-    
-<script>
+    <script>
+    (() => {
         /*
 
 */
