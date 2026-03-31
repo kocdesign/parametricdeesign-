@@ -191,21 +191,21 @@ document.getElementById ("modeSelect").addEventListener ("change", (e) →> {
 /* 
 
 */
-document.getElementById ("micButton").onclick = async () => {
+document.getElementById("micButton").onclick = async () => {
     audioCtx = new AudioContext();
     await audioCtx.resume(); // <- ensures AudioContext is running
     
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     const src = audiotx.createMediaStreamSource (stream);
     
-    analyser = audioCtx. createAnalyser ();
+    analyser = audioCtx.createAnalyser ();
     analyser.fftSize = 1024; /* lower resolution = chunkier, reactive feel */
     analyser.smoothingTimeConstant = 0.4; /* immediate / reactive (good for percussion) */
     
     freqData = new Uint8Array(analyser.frequencyBinCount);
     timeData = new Uint8Array(analyser.fftSize);
     
-    src.connect (analyser);
+    src.connect(analyser);
     
     animate();
 };
