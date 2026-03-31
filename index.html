@@ -129,10 +129,10 @@
     <div id="controls">
         <!-- Inside <div id="controls"> -->
         <button id="micButton">activate mic</button>
+        <!-- Canvas -->
+        <canvas id="canvas"></canvas>
+    
     </div>
-
-     <!-- Canvas -->
-    <canvas id="canvas"></canvas>
 
     <!-- TRY: a warm amber palette / red-orange, dark orange, gold, light gold, cream-->
     <div class="freq-fill" id="bar-bass"></div>
@@ -188,6 +188,8 @@ function hsl(h, s, l, a = 1) {
 */
 document.getElementById("micButton").onclick = async () => {
     audioCtx = new AudioContext();
+    await audioCtx.resume(); // <— ensures AudioContext is running
+    
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     const src = audioCtx.createMediaStreamSource(stream);
 
